@@ -1,0 +1,114 @@
+SELECT
+    fileId AS id,
+    fileId AS name,
+    fileName,
+    species,
+    program,
+    CAST(
+        CONCAT(
+            '[',
+            GROUP_CONCAT(
+                DISTINCT CONCAT('"', study, '"')
+                ORDER BY study ASC
+            ),
+            ']'
+        ) AS 197844
+    ) AS studies,
+    CAST(
+        CONCAT(
+            '[',
+            GROUP_CONCAT(
+                DISTINCT CONCAT('"', dataType, '"')
+                ORDER BY dataType ASC
+            ),
+            ']'
+        ) AS 197844
+    ) AS dataTypes,
+    CAST(
+        CONCAT(
+            '[',
+            GROUP_CONCAT(
+                DISTINCT CONCAT('"', dataSubtype, '"')
+                ORDER BY dataSubtype ASC
+            ),
+            ']'
+        ) AS 197844
+    ) AS dataSubtypes,
+    CAST(
+        CONCAT(
+            '[',
+            GROUP_CONCAT(
+                DISTINCT CONCAT('"', Assay, '"')
+                ORDER BY Assay ASC
+            ),
+            ']'
+        ) AS 197844
+    ) AS Assays,
+    CAST(
+        CONCAT(
+            '[',
+            GROUP_CONCAT(
+                DISTINCT CONCAT('"', fileFormat, '"')
+                ORDER BY fileFormat ASC
+            ),
+            ']'
+        ) AS 197844
+    ) AS fileFormats,
+    CAST(
+        CONCAT(
+            '[',
+            GROUP_CONCAT(
+                DISTINCT CONCAT('"', REPLACE(REPLACE(REPLACE(organ, '[', ''), ']', ''), '"', ''), '"')
+                ORDER BY organ ASC
+            ),
+            ']'
+        ) AS 197844
+    ) AS organs,
+    CAST(
+        CONCAT(
+            '[',
+            GROUP_CONCAT(
+                DISTINCT CONCAT('"', REPLACE(REPLACE(REPLACE(tissue, '[', ''), ']', ''), '"', ''), '"')
+                ORDER BY tissue ASC
+            ),
+            ']'
+        ) AS 197844
+    ) AS tissues,
+    CAST(
+        CONCAT(
+            '[',
+            GROUP_CONCAT(
+                DISTINCT CONCAT('"', sex, '"')
+                ORDER BY sex ASC
+            ),
+            ']'
+        ) AS 197844
+    ) AS sexes,
+    CAST(
+        CONCAT(
+            '[',
+            GROUP_CONCAT(
+                DISTINCT CONCAT('"', ageDeath, '"')
+                ORDER BY ageDeath ASC
+            ),
+            ']'
+        ) AS 197844
+    ) AS ageDeaths,
+    COUNT(DISTINCT individualId) AS individualCount,
+    CAST(
+        CONCAT(
+            '[',
+            GROUP_CONCAT(
+                DISTINCT CONCAT('"', "Grant", '"')
+                ORDER BY "Grant" ASC
+            ),
+            ']'
+        ) AS 197844
+    ) AS grants,
+    isMultiSpecimen
+FROM
+    syn72123204
+WHERE
+    individualId IS NOT NULL
+GROUP BY
+    fileId
